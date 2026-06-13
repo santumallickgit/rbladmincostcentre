@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  username String @unique
+  password String
+  role     String
+}
+
+model CanteenDailyEntry {
+  id              String   @id @default(uuid())
+  date            DateTime @unique
+  rice            Float    @default(0)
+  beef            Float    @default(0)
+  chicken         Float    @default(0)
+  fish            Float    @default(0)
+  veg             Float    @default(0)
+  oil             Float    @default(0)
+  spices          Float    @default(0)
+  flour           Float    @default(0)
+  dal             Float    @default(0)
+  sugar           Float    @default(0)
+  breadCake       Float    @default(0)
+  milk            Float    @default(0)
+  eggs            Float    @default(0)
+  others          Float    @default(0)
+  staffSalary     Float    @default(0)
+  breakfastToken  Float    @default(0)
+  lunchDinnerToken Float   @default(0)
+  createdAt       DateTime @default(now())
+}
+
+model CanteenMonthlySummary {
+  id        String @id @default(uuid())
+  monthYear String @unique
+  scrapSale Float  @default(0)
+  totalToken Float @default(0)
+}
+
+model Driver {
+  id       String              @id @default(uuid())
+  name     String              @unique
+  color    String
+  isActive Boolean             @default(true)
+  entries  PoolCarDailyEntry[]
+}
+
+model PoolCar {
+  id             String            @id @default(uuid())
+  licensePlate   String            @unique
+  costCenterName String
+  costCenterCode String?
+  fuelType       String            @default("OCTANE")
+  isActive       Boolean           @default(true)
+  entries        PoolCarDailyEntry[]
+}
+
+model PoolCarDailyEntry {
+  id              String   @id @default(uuid())
+  date            DateTime
+  carId           String
+  car             PoolCar  @relation(fields: [carId], references: [id])
+  driverId        String?
+  driver          Driver?  @relation(fields: [driverId], references: [id])
+  kmPerDay        Float    @default(0)
+  maintenanceCost Float    @default(0)
+  octaneCost      Float    @default(0)
+  dieselCost      Float    @default(0)
+  cngCost         Float    @default(0)
+  lpgCost         Float    @default(0)
+  othersCost      Float    @default(0)
+  driverOtHours   Float    @default(0)
+
+  @@unique([date, carId])
+}
