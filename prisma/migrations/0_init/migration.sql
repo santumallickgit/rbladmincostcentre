@@ -1,15 +1,9 @@
--- new changes
-
--- CreateSchema
-CREATE SCHEMA IF NOT EXISTS "public";
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "role" TEXT NOT NULL,
-
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
@@ -35,7 +29,6 @@ CREATE TABLE "CanteenDailyEntry" (
     "breakfastToken" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "lunchDinnerToken" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
     CONSTRAINT "CanteenDailyEntry_pkey" PRIMARY KEY ("id")
 );
 
@@ -45,7 +38,6 @@ CREATE TABLE "CanteenMonthlySummary" (
     "monthYear" TEXT NOT NULL,
     "scrapSale" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "totalToken" DOUBLE PRECISION NOT NULL DEFAULT 0,
-
     CONSTRAINT "CanteenMonthlySummary_pkey" PRIMARY KEY ("id")
 );
 
@@ -55,7 +47,6 @@ CREATE TABLE "Driver" (
     "name" TEXT NOT NULL,
     "color" TEXT NOT NULL,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
-
     CONSTRAINT "Driver_pkey" PRIMARY KEY ("id")
 );
 
@@ -67,7 +58,6 @@ CREATE TABLE "PoolCar" (
     "costCenterCode" TEXT,
     "fuelType" TEXT NOT NULL DEFAULT 'OCTANE',
     "isActive" BOOLEAN NOT NULL DEFAULT true,
-
     CONSTRAINT "PoolCar_pkey" PRIMARY KEY ("id")
 );
 
@@ -85,7 +75,6 @@ CREATE TABLE "PoolCarDailyEntry" (
     "lpgCost" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "othersCost" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "driverOtHours" DOUBLE PRECISION NOT NULL DEFAULT 0,
-
     CONSTRAINT "PoolCarDailyEntry_pkey" PRIMARY KEY ("id")
 );
 
